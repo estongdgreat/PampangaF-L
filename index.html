@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
@@ -29,7 +30,6 @@
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
         <script src="js/L.Control.Locate.min.js"></script>
-        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -37,11 +37,12 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="data/LandslideSusceptibility_1.js"></script>
         <script src="data/FloodSusceptibility_2.js"></script>
-        <script src="data/Pampanga_Muni_3.js"></script>
-        <script src="data/15KmBufferZone_4.js"></script>
+        <script src="data/MunicipalBoundaries_3.js"></script>
+        <script src="data/BufferZone_4.js"></script>
         <script src="data/Bridge_5.js"></script>
         <script>
         var map = L.map('map', {
@@ -178,7 +179,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(144,36,0,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'HL':
@@ -193,7 +194,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(255,0,0,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'ML':
@@ -208,7 +209,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(0,128,0,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'LL':
@@ -223,7 +224,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(255,255,0,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'DF':
@@ -232,7 +233,7 @@
                 stroke: false,
                 fillOpacity: 1,
                 fillPattern: pattern_LandslideSusceptibility_1_0,
-                interactive: true,
+                interactive: false,
             }
                     break;
             }
@@ -242,7 +243,7 @@
         map.getPane('pane_LandslideSusceptibility_1').style['mix-blend-mode'] = 'normal';
         var layer_LandslideSusceptibility_1 = new L.geoJson(json_LandslideSusceptibility_1, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_LandslideSusceptibility_1',
             layerName: 'layer_LandslideSusceptibility_1',
             pane: 'pane_LandslideSusceptibility_1',
@@ -309,7 +310,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(0,38,115,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'HF':
@@ -324,7 +325,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(89,0,255,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'MF':
@@ -339,7 +340,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(176,69,255,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
                 case 'LF':
@@ -354,7 +355,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(227,209,255,0.3)',
-                interactive: true,
+                interactive: false,
             }
                     break;
             }
@@ -364,7 +365,7 @@
         map.getPane('pane_FloodSusceptibility_2').style['mix-blend-mode'] = 'normal';
         var layer_FloodSusceptibility_2 = new L.geoJson(json_FloodSusceptibility_2, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_FloodSusceptibility_2',
             layerName: 'layer_FloodSusceptibility_2',
             pane: 'pane_FloodSusceptibility_2',
@@ -373,7 +374,7 @@
         });
         bounds_group.addLayer(layer_FloodSusceptibility_2);
         map.addLayer(layer_FloodSusceptibility_2);
-        function pop_Pampanga_Muni_3(feature, layer) {
+        function pop_MunicipalBoundaries_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -401,9 +402,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Pampanga_Muni_3_0() {
+        function style_MunicipalBoundaries_3_0() {
             return {
-                pane: 'pane_Pampanga_Muni_3',
+                pane: 'pane_MunicipalBoundaries_3',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -414,21 +415,21 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_Pampanga_Muni_3');
-        map.getPane('pane_Pampanga_Muni_3').style.zIndex = 403;
-        map.getPane('pane_Pampanga_Muni_3').style['mix-blend-mode'] = 'normal';
-        var layer_Pampanga_Muni_3 = new L.geoJson(json_Pampanga_Muni_3, {
+        map.createPane('pane_MunicipalBoundaries_3');
+        map.getPane('pane_MunicipalBoundaries_3').style.zIndex = 403;
+        map.getPane('pane_MunicipalBoundaries_3').style['mix-blend-mode'] = 'normal';
+        var layer_MunicipalBoundaries_3 = new L.geoJson(json_MunicipalBoundaries_3, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Pampanga_Muni_3',
-            layerName: 'layer_Pampanga_Muni_3',
-            pane: 'pane_Pampanga_Muni_3',
-            onEachFeature: pop_Pampanga_Muni_3,
-            style: style_Pampanga_Muni_3_0,
+            dataVar: 'json_MunicipalBoundaries_3',
+            layerName: 'layer_MunicipalBoundaries_3',
+            pane: 'pane_MunicipalBoundaries_3',
+            onEachFeature: pop_MunicipalBoundaries_3,
+            style: style_MunicipalBoundaries_3_0,
         });
-        bounds_group.addLayer(layer_Pampanga_Muni_3);
-        map.addLayer(layer_Pampanga_Muni_3);
-        function pop_15KmBufferZone_4(feature, layer) {
+        bounds_group.addLayer(layer_MunicipalBoundaries_3);
+        map.addLayer(layer_MunicipalBoundaries_3);
+        function pop_BufferZone_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
@@ -450,9 +451,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_15KmBufferZone_4_0() {
+        function style_BufferZone_4_0() {
             return {
-                pane: 'pane_15KmBufferZone_4',
+                pane: 'pane_BufferZone_4',
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
@@ -462,23 +463,23 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(0,0,255,0.0)',
-                interactive: true,
+                interactive: false,
             }
         }
-        map.createPane('pane_15KmBufferZone_4');
-        map.getPane('pane_15KmBufferZone_4').style.zIndex = 404;
-        map.getPane('pane_15KmBufferZone_4').style['mix-blend-mode'] = 'normal';
-        var layer_15KmBufferZone_4 = new L.geoJson(json_15KmBufferZone_4, {
+        map.createPane('pane_BufferZone_4');
+        map.getPane('pane_BufferZone_4').style.zIndex = 404;
+        map.getPane('pane_BufferZone_4').style['mix-blend-mode'] = 'normal';
+        var layer_BufferZone_4 = new L.geoJson(json_BufferZone_4, {
             attribution: '',
-            interactive: true,
-            dataVar: 'json_15KmBufferZone_4',
-            layerName: 'layer_15KmBufferZone_4',
-            pane: 'pane_15KmBufferZone_4',
-            onEachFeature: pop_15KmBufferZone_4,
-            style: style_15KmBufferZone_4_0,
+            interactive: false,
+            dataVar: 'json_BufferZone_4',
+            layerName: 'layer_BufferZone_4',
+            pane: 'pane_BufferZone_4',
+            onEachFeature: pop_BufferZone_4,
+            style: style_BufferZone_4_0,
         });
-        bounds_group.addLayer(layer_15KmBufferZone_4);
-        map.addLayer(layer_15KmBufferZone_4);
+        bounds_group.addLayer(layer_BufferZone_4);
+        map.addLayer(layer_BufferZone_4);
         function pop_Bridge_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -499,16 +500,16 @@
         function style_Bridge_5_0() {
             return {
                 pane: 'pane_Bridge_5',
-                radius: 10.0,
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(128,17,25,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
+                fillColor: 'rgba(219,30,42,1.0)',
                 interactive: true,
             }
         }
@@ -527,16 +528,26 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_Bridge_5_0(feature));
+                return L.circleMarker(latlng, style_Bridge_5_0(feature));
             },
         });
         bounds_group.addLayer(layer_Bridge_5);
         map.addLayer(layer_Bridge_5);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
         var baseMaps = {};
         var overlaysTree = [
             {label: '<img src="legend/Bridge_5.png" /> Bridge', layer: layer_Bridge_5},
-            {label: '<img src="legend/15KmBufferZone_4.png" /> 1.5 Km Buffer Zone', layer: layer_15KmBufferZone_4},
-            {label: '<img src="legend/Pampanga_Muni_3.png" /> Pampanga_Muni', layer: layer_Pampanga_Muni_3},
+            {label: '<img src="legend/BufferZone_4.png" /> Buffer Zone', layer: layer_BufferZone_4},
+            {label: '<img src="legend/MunicipalBoundaries_3.png" /> Municipal Boundaries', layer: layer_MunicipalBoundaries_3},
             {label: 'Flood Susceptibility<br /><table><tr><td style="text-align: center;"><img src="legend/FloodSusceptibility_2_VeryHigh0.png" /></td><td>Very High</td></tr><tr><td style="text-align: center;"><img src="legend/FloodSusceptibility_2_High1.png" /></td><td>High</td></tr><tr><td style="text-align: center;"><img src="legend/FloodSusceptibility_2_Moderate2.png" /></td><td>Moderate</td></tr><tr><td style="text-align: center;"><img src="legend/FloodSusceptibility_2_Low3.png" /></td><td>Low</td></tr></table>', layer: layer_FloodSusceptibility_2},
             {label: 'Landslide Susceptibility<br /><table><tr><td style="text-align: center;"><img src="legend/LandslideSusceptibility_1_VeryHigh0.png" /></td><td>Very High</td></tr><tr><td style="text-align: center;"><img src="legend/LandslideSusceptibility_1_High1.png" /></td><td>High</td></tr><tr><td style="text-align: center;"><img src="legend/LandslideSusceptibility_1_Moderate2.png" /></td><td>Moderate</td></tr><tr><td style="text-align: center;"><img src="legend/LandslideSusceptibility_1_Low3.png" /></td><td>Low</td></tr><tr><td style="text-align: center;"><img src="legend/LandslideSusceptibility_1_DebrisFlow4.png" /></td><td>Debris Flow</td></tr></table>', layer: layer_LandslideSusceptibility_1},
             {label: "Google Satellite Hybrid", layer: layer_GoogleSatelliteHybrid_0},]
@@ -614,15 +625,15 @@
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_Pampanga_Muni_3,layer_Bridge_5]);
+        resetLabels([layer_MunicipalBoundaries_3,layer_Bridge_5]);
         map.on("zoomend", function(){
-            resetLabels([layer_Pampanga_Muni_3,layer_Bridge_5]);
+            resetLabels([layer_MunicipalBoundaries_3,layer_Bridge_5]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Pampanga_Muni_3,layer_Bridge_5]);
+            resetLabels([layer_MunicipalBoundaries_3,layer_Bridge_5]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Pampanga_Muni_3,layer_Bridge_5]);
+            resetLabels([layer_MunicipalBoundaries_3,layer_Bridge_5]);
         });
         </script>
     </body>
